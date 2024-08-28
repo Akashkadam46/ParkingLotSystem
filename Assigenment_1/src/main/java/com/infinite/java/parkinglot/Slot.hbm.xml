@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.infinite.java.parkinglot.Slot" table="slot">
+		<meta attribute="class-description">
+			This class contains the department detail.
+		</meta>
+
+		<id name="slotId" type="int" column="slotId">
+			<generator class="increment" />
+		</id>
+
+
+
+
+		<property name="sCategory" not-null="true" unique="true">
+			<column name="sCategory" />
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.infinite.java.parkinglot.SCategory</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+		<property name="startDate" column="startDate" type="date" />
+		<property name="endDate" column="endDate" type="date" />
+		<property name="slotNumber" column="slotNumber" type="int" unique="true"/>
+		<property name="rId" column="rId" type="int" unique="true" />
+		<property name="vehicleNumber" column="vehicleNumber" type="string" unique="true"/>
+		<property name="bookedBy" column="bookedBy" type="string" />
+		<property name="totalBill" column="totalBill" type="double" />
+
+		<one-to-one name="register"
+			class="com.infinite.java.parkinglot.Registration_Entity">
+		</one-to-one>
+
+	</class>
+</hibernate-mapping>

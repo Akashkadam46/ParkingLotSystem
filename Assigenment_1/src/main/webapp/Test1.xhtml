@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script>
+    function resetFormFields() {
+              // Replace 'myForm' with the ID of your form
+        var form = document.getElementById('myForm');
+
+        // Reset the form using JavaScript's reset() method
+        form.reset();
+    }
+
+    const myForm = document.getElementById('myForm');
+
+    // Add a submit event listener to the form
+    myForm.addEventListener('submit', function(event) {
+        // Perform your validation here
+        if (!validateForm()) {
+            // If validation fails, prevent the form from submitting
+            event.preventDefault();
+        }
+    });
+
+    // Function to validate the form (example validation)
+    function validateForm() {
+        const username = myForm.elements['vehicleNumber'].value;
+        const email = myForm.elements['sCategory'].value;
+
+        // Perform your validation checks here
+        if (username === '' || email === '') {
+            alert('Please fill in all required fields.');
+            return false;
+        }
+
+        // If validation passes
+        return true;
+    }
+
+    // Add a beforeunload event listener to prevent navigation
+    window.addEventListener('beforeunload', function(event) {
+        // Check if the form is dirty (modified) and prevent navigation
+        if (myForm.checkValidity() === false) {
+            event.preventDefault();
+            event.returnValue = ''; // This is required for older browsers
+        }
+    });
+
+</script>
+
+	<title>Booking</title>
+	<style>
+#title {
+	font-family: sans-serif;
+	border-bottom-style: inset;
+	padding-top: 0%;
+	padding-bottom: 0%;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	margin-left: 0;
+}
+
+#mainDiv {
+	height: 800px;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	margin-top: 30px;
+	background-color: buttonface;
+	width: 370px;
+}
+
+.error-message {
+	color: red;
+}
+
+.error-message-age {
+	color: red;
+	font-size: 12px; /* Optional: Adjust font size as needed */
+}
+
+.form-container {
+	/* display: flex; */
+	/* justify-content: center; */
+	/* align-items: center; */
+	margin-top: 20px;
+	margin-left: 20px;
+	height: 100vh; /* Optional: Adjust the height to center vertically */
+}
+
+#UPDATE {
+	background-color: rgb();
+}
+
+/* Styling for the charges section */
+
+
+.charge-container {
+    float: right;
+    margin-right: 20px;
+    width: 200px; /* Adjust the width as needed */
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.charge-item {
+    margin-bottom: 10px;
+}
+
+.charge-label {
+    font-weight: bold;
+    display: block;
+}
+
+
+</style>
+</h:head>
+<h:body onload="resetFormFields()"
+	style="background-image: url(#{request.contextPath}/images/02.jpg); 
+  background-repeat: no-repeat;
+  background-size: cover;">
+	<div>
+		<ui:include src="/HomePage.xhtml" />
+	</div>
+	<div id="mainDiv" align="center">
+		<div class="heading">
+			<h1 style="text-shadow: 1px 1px 1px darkgrey;">Book a slot.</h1>
+
+		</div>
+		<hr />
+		<p:outputPanel id="panel">
+			<div class="form-container">
+				<h:form id="myForm">
+
+
+					<h:message style="color:red" />
+
+					<f:facet name="header">
+						<h5 id="title">
+							<p:outputLabel value="Book Slot" />
+						</h5>
+					</f:facet>
+					<h:outputLabel value="Slot number :" />
+					<h:outputLabel value="#{selectedAvailability.slotNumber}" 
+						readonly="true" />
+					<br />
+					<br />
+
+					<h:outputLabel value="Start Date :" />
+					 <p:calendar id="startDate" value="#{slot.startDate}" pattern="MM-dd-yyyy" 
+					 mindate="#{slot.startDateRestriction}" required="true" requiredMessage="Start Date is required"
+					 >
+            <p:ajax event="dateSelect" listener="#{slot.startDateChanged}" update="endDate" />
+        </p:calendar>
+        <br />
+        <h:message for="startDate" style="color:red; 200px; margin-left: 100px;" />
+					<br />
+					<br />
+
+					<h:outputLabel value="End Date :" />
+					<p:calendar id="endDate" value="#{slot.endDate}" pattern="MM-dd-yyyy" 
+					mindate="#{slot.restrictedDate}" required="true" requiredMessage="End Date is required"
+					
+					/>
+					<br />
+					<h:message for="endDate" style="color:red; 200px; margin-left: 100px;" />
+					<br />
+					<br />
+
+
+					<h:outputLabel value="rId :" />
+					<h:outputLabel value="#{loggedInUser.rId}" readonly="true" />
+					<br />
+					<br />
+
+
+					<h:outputLabel value="Vehicle Number :" />
+					<br />
+					<p:inputText id="vehicleNumber" value="#{slot.vehicleNumber}"
+						required="true" requiredMessage="Please Enter Vehicle Number !">
+						<f:validator validatorId="VehicleNumberValidator" />
+					</p:inputText>
+					<br />
+					<h:message for="vehicleNumber" style="color:red;" />
+					<br />
+					<br />
+
+
+
+
+
+					<h:outputText value="Vehicle Type :" />
+					<br />
+					<p:selectOneMenu id="sCategory" value="#{slot.sCategory}"
+						required="true" requiredMessage="Select vehicle category !">
+						<f:selectItem itemLabel="--Select--" itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{slot.SCategories}" />
+
+					</p:selectOneMenu>
+					<br />
+					<h:message for="sCategory" styleClass="error-message" />
+
+
+
+					<br />
+					<br />
+					
+					 <h:panelGrid columns="2">
+            <h:outputText value="Two-Wheeler Charges:" />
+            <h:outputText value="Rs. 10 per day" />
+            <h:outputText value="Four-Wheeler Charges:" />
+            <h:outputText value="Rs. 20 per day" />
+            <h:outputText value="Total Bill:" />
+            <h:outputText value="Rate per day * Tax Rate(1.02)" />
+        </h:panelGrid>
+
+                   <br />
+					<br />
+					
+
+					<div id="buttonDiv">
+    <h:commandButton id="BACK" value="Reset"
+        style="background-color: rgb(30,144,255);border: none; color:white; 
+        border-radius:10px; padding: 10px 20px; text-align: center;text-decoration: none;display: inline-block;font-size: 16px;">
+        <p:ajax update="panel" resetValues="true" />
+    </h:commandButton>
+    <!-- Add a gap between the buttons -->
+    <span style="margin: 0 40px;"></span>
+    <h:commandButton id="myForm" value="BOOK"
+        style="background-color: rgb(30,144,255);border: none; color:white; 
+        border-radius:10px;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;"
+        action="#{sDao.generatePaymentSave(slot)}"
+        class="btn btn-success" onclick="return validateForm();" />
+</div>
+         
+				</h:form>
+				<br /> <br /> <br />
+
+			</div>
+			<!-- Static charges information on the right -->
+		
+		</p:outputPanel>
+	</div>
+	<!-- <div id="footer">
+		<ui:include src="/Footer.xhtml" />
+	</div> -->
+
+</h:body>
+
+</html>

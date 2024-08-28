@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<body>
+	<h:form style="width: 500px; margin: 0 auto;">User Name :<h:inputText
+			id="userName" value="#{user.userName}"
+			style="width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" />
+		<br />
+		<br />Password :<h:inputSecret value="#{user.password}"
+			style="width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" />
+		<br />
+		<br />
+		<h:commandButton value="Login" action="#{uDao.validateMe(user)}"
+			style="width: 100%;background-color: #4CAF50; color: white; padding: 14px 20px; margin: 8px 0;border: none; cursor: pointer; box-sizing: border-box;" />
+		
+		<br /><br />
+		
+
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+ <h:commandLink id="image-link-id1" action="VerifyProfilePassword2.xhtml">  
+<h:outputText value="Forget Password"></h:outputText>  </h:commandLink>
+		
+		<p>
+			<h:outputLabel value="#{errorMessage}"
+				style="color: red; font-weight: bold;" />
+				
+		</p>
+	</h:form>
+</body>
+</html>

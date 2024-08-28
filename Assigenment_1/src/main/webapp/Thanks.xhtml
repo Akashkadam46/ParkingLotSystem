@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Booking Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .success-message {
+            color: green;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .go-home-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .go-home-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</h:head>
+<body>
+    <h1>Booking Confirmation</h1>
+    <p class="success-message">You have booked a slot successfully</p>
+
+    <div class="button-container">
+        <!-- Add the button to go to the homepage -->
+        <h:button value="Go to Homepage" outcome="HomePageNew.xhtml" styleClass="go-home-button" />
+    </div>
+
+    <script>
+        // Disable navigating back in browser history
+        window.history.pushState(null, document.title, window.location.href);
+        window.addEventListener('popstate', function (event) {
+            window.history.pushState(null, document.title, window.location.href);
+        });
+    </script>
+</body>
+</html>

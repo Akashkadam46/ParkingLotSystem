@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login Page</title>
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+		crossorigin="anonymous" />
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
+
+	<style>
+body {
+	background-image:
+		url("https://c0.wallpaperflare.com/preview/99/0/27/medicine-pills-prescription-healthcare.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	display: flex;
+	justify-content: center;
+	margin-top: -2%;
+	align-items: center;
+}
+
+input[type=text]:focus {
+	transition: width 0.4s ease-in-out;
+}
+
+form {
+	display: block;
+	font-family: arial;
+	width: 500px;
+	color: black;
+	font-style: normal;
+	padding: 10px;
+	margin: 10px;
+	font-weight: bold;
+	 
+}
+</style>
+	<h:panelGrid columns="2" border="2" cellpadding="10" cellspacing="2"
+		style="margin-top:130px" bgcolor="white">
+		<h:body>
+
+
+			<center>
+
+
+
+
+
+
+				<h:form id="loginForm">
+
+					<h1>Parking Login</h1>
+					<br />
+
+
+
+					<label>UserName : </label>
+					<p:inputText id="userName" required="true"
+						label="Please Enter UserName " requiredMessage="Enter UserName"
+						value="#{register.userName}">
+						<f:validator validatorId="DuplicateUserName" />
+					</p:inputText>
+					<p:watermark for="userName" value="Enter UserName" />
+					<br />
+					<h:message for="userName" globalOnly="true"
+						style="color:#FF0000;  margin-left: 100px;" />
+					<br />
+
+					<label>Category: </label>
+					<p:selectOneMenu id="Category" value="#{register.category}"
+						required="true" label="Category"
+						requiredMessage="Please select Category">
+
+
+						<f:selectItem itemLabel="--Select--" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Admin" itemValue="ADMIN" />
+						<f:selectItem itemLabel="Staff" itemValue="STAFF" />
+					</p:selectOneMenu>
+					<br />
+					<h:message for="Category" globalOnly="true"
+						style="color:#FF0000;  margin-left: 100px;" />
+
+					<h:outputLabel value="#{regDao.errorMsg}" style="color:red;" />
+
+
+					<br />
+
+					<br />
+
+					<label>PassWord :</label>
+					<p:password id="passWord" required="true" label="PassWord"
+						requiredMessage="Enter Password." value="#{register.passWord}"
+						oncopy="return false;" onpaste="return false;"
+						validatorMessage="You have entered wrong password">
+					</p:password>
+					<p:watermark for="passWord" value="Enter Password " />
+					<br />
+					<h:message for="passWord" globalOnly="true"
+						style="color:#FF0000; 200px; margin-left: 100px;" />
+					<h:outputLabel value="#{regDao.err2}" style="color:red;" />
+					<br />
+					<br />
+
+
+					<h:commandButton value="Login"
+						action="#{regDao.authenticate(register)}" class="btn btn-primary" />
+					<br />
+
+				</h:form>
+				<h:form>
+
+
+					<h:commandLink id="newuser" action="Registration.xhtml"
+						class="btn btn-light">
+
+
+						<h:outputText value="Register New User"></h:outputText>
+					</h:commandLink>
+						&nbsp; &nbsp;
+
+						<h:commandLink id="forgotpass" action="SendOtp.xhtml"
+						class="btn btn-light">
+						<h:outputText value="Forgot Password"></h:outputText>
+					</h:commandLink>
+
+
+
+
+
+
+
+				</h:form>
+
+			</center>
+
+			<script>
+        // Disable navigating back in browser history
+        window.history.pushState(null, document.title, window.location.href);
+        window.addEventListener('popstate', function (event) {
+            window.history.pushState(null, document.title, window.location.href);
+        });
+    </script>
+
+
+		</h:body>
+	</h:panelGrid>
+</h:head>
+</html>

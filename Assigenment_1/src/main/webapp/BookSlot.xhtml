@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Book Slot</title>
+	<style>
+#timeDiv {
+	width: 73%;
+	padding-left: 123px;
+}
+
+#mainDiv {
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	margin-top: 30px;
+	background-color: buttonface;
+	width: 500px;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+}
+
+.marquee {
+	white-space: nowrap;
+	-webkit-animation: rightThenLeft 9s linear;
+	font-family: monospace;
+}
+
+#title {
+	font-family: sans-serif;
+	border-bottom-style: inset;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px; /* Optional: Adjust font size as needed */
+  }
+
+#marquee2 {
+	display: none;
+}
+</style>
+</h:head>
+<h:head>
+	<script>
+	
+
+</script>
+</h:head>
+<h:body>
+	<div>
+		<ui:include src="/HomePage.xhtml" />
+	</div>
+	<div id="mainDiv" style="" align="center">
+		<h2 id="title">
+			<h:outputText value="Book Slot" />
+		</h2>
+		<h:form id="myForm">
+			<h:outputText value="Vehicle Number :" />
+			<br />
+			<h:inputText id="vehicleNumber" value="#{slot.vehicleNumber}"
+				required="true" requiredMessage="Enter the vehicle number !">
+				<f:validator validatorId="VehicleNumberValidator" />
+			</h:inputText>
+			<br />
+			<h:message for="vehicleNumber"  styleClass="error-message;" />
+			<br />
+			<br />
+			<h:outputText value="Vehicle Type :" />
+			<br />
+			<h:selectOneMenu id="sCategory" value="#{slot.sCategory}"
+				required="true" requiredMessage="Select vehicle category !">
+				<f:selectItem itemLabel="--Select--" itemValue="#{null}"
+					noSelectionOption="true" />
+				<f:selectItems value="#{slot.SCategories}" />
+			</h:selectOneMenu>
+			<br />
+			<h:message for="sCategory" style="color: red;" />
+			<br />
+			<br />
+
+			<h:outputText value="Start date :" />
+			<br />
+			<h:inputText id="startDate" value="#{slot.startDate}" required="true"
+				requiredMessage="Enter the start date !">
+				<f:convertDateTime pattern="dd-MM-yyyy" />
+				<f:validator validatorId="StartDateValidator" />
+			</h:inputText>
+			<br />
+			<h:message for="startDate" style="color: red;" />
+			<br />
+			<br />
+
+			<h:outputText value="End date :" />
+			<br />
+			<h:inputText id="endDate" value="#{slot.endDate}" required="true"
+				requiredMessage="Enter the end date !">
+				<f:convertDateTime pattern="dd-MM-yyyy" />
+				<f:validator validatorId="EndDateValidator" />
+			</h:inputText>
+			<br />
+			<h:message for="endDate" style="color: red;" />
+			<br />
+			<br />
+
+			<h:outputText value="Parking slot number :" />
+			<br />
+			<h:selectOneMenu id="slotNumber" value="#{slot.slotNumber}"
+				required="true" requiredMessage="Select Slot Number !">
+				<f:selectItem itemLabel="--Select--" itemValue="#{null}"
+					noSelectionOption="true" />
+				<f:selectItems value="#{parkingSlotList}" />
+			</h:selectOneMenu>
+			<br />
+			<h:message for="slotNumber"  styleClass="error-message" />
+			<br />
+			<br />
+
+			<h:commandButton onblur="resetFormFields()"
+				action="#{sDao.bookParkingSlot(slot)}" value="Book" />
+
+			<h:commandButton onclick="resetFormFields()" value="Reset" />
+
+		</h:form>
+	</div>
+	<br />
+	<script>
+    function resetFormFields() {
+        alert('reseting');
+
+    	// Replace 'myForm' with the ID of your form
+        var form = document.getElementById('myform');
+
+        // Reset the form using JavaScript's reset() method
+        form.reset();
+     }
+    
+</script>
+
+</h:body>
+
+</html>

@@ -1,0 +1,89 @@
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
+	<!-- This file must be present with our jar, even if it is empty. Otherwise, 
+		our Java annotations won't get scanned! -->
+
+
+	<managed-bean>
+		<managed-bean-name>register</managed-bean-name>
+		<managed-bean-class>com.infinite.java.parkinglot.Registration_Entity</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>slot</managed-bean-name>
+		<managed-bean-class>com.infinite.java.parkinglot.Slot</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>sDao</managed-bean-name>
+		<managed-bean-class>com.infinite.java.parkinglot.SlotDaoImpl</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+
+	<managed-bean>
+		<managed-bean-name>regDao</managed-bean-name>
+		<managed-bean-class>com.infinite.java.parkinglot.RegistrationDaoImpl</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<validator>
+
+		<validator-id>phoneValidator</validator-id>
+		<validator-class>com.infinite.java.parkinglot.PhoneNumberValidator</validator-class>
+	</validator>
+	<validator>
+
+		<validator-id>emailValidator</validator-id>
+		<validator-class>com.infinite.java.parkinglot.EmailValidator</validator-class>
+	</validator>
+	<validator>
+
+		<validator-id>userNameValidator</validator-id>
+		<validator-class>com.infinite.java.parkinglot.UserNameValidator</validator-class>
+	</validator>
+	<validator>
+
+		<validator-id>userNameJsfValidator</validator-id>
+		<validator-class>com.infinite.java.parkinglot.UserNameValidator</validator-class>
+	</validator>
+	<validator>
+
+		<validator-id>AnswerJsfValidator</validator-id>
+		<validator-class>com.infinite.java.parkinglot.UserNameValidator</validator-class>
+	</validator>
+	<validator>
+
+		<validator-id>OldPasswordValidation</validator-id>
+		<validator-class>com.infinite.java.parkinglot.OldPasswordValidation</validator-class>
+	</validator>
+	<validator>
+
+
+		<validator-id>DuplicateUserName</validator-id>
+		<validator-class>com.infinite.java.parkinglot.DuplicateUsername</validator-class>
+	</validator>
+	
+	<validator>
+		<validator-id>VehicleNumberValidator</validator-id>
+		<validator-class>com.infinite.java.parkinglot.VehicleNumberValidator</validator-class>
+	</validator>
+	
+	<validator>
+		<validator-id>StartDateValidator</validator-id>
+		<validator-class>com.infinite.java.parkinglot.StartDateValidator</validator-class>
+	</validator>
+	
+	<validator>
+		<validator-id>EndDateValidator</validator-id>
+		<validator-class>com.infinite.java.parkinglot.EndDateValidator</validator-class>
+	</validator>
+
+
+
+</faces-config>

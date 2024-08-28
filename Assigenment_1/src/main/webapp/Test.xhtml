@@ -1,0 +1,195 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script>
+    function resetFormFields() {
+        alert('reseting');
+
+    	// Replace 'myForm' with the ID of your form
+        var form = document.getElementById('myform');
+
+        // Reset the form using JavaScript's reset() method
+        form.reset();
+     }
+    
+</script>
+
+	<title>Booking</title>
+	<style>
+#title {
+	font-family: sans-serif;
+	border-bottom-style: inset;
+	padding-top: 0%;
+	padding-bottom: 0%;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	margin-left: 0;
+}
+
+#mainDiv {
+	height: 400px;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	margin-top: 30px;
+	background-color: buttonface;
+	width: 370px;
+}
+
+.error-message {
+	color: red;
+}
+
+.error-message-age {
+	color: red;
+	font-size: 12px; /* Optional: Adjust font size as needed */
+}
+
+.form-container {
+	/* display: flex; */
+	/* justify-content: center; */
+	/* align-items: center; */
+	margin-top: 20px;
+	margin-left: 20px;
+	height: 100vh; /* Optional: Adjust the height to center vertically */
+}
+
+#UPDATE {
+	background-color: rgb();
+}
+</style>
+</h:head>
+<h:body
+	style="background-image: url(#{request.contextPath}/images/02.jpg); 
+  background-repeat: no-repeat;
+  background-size: cover;">
+	<div>
+		<ui:include src="/HomePage.xhtml" />
+	</div>
+	<div id="mainDiv" align="center">
+		<div class="heading">
+			<h1 style="text-shadow: 1px 1px 1px darkgrey;">Details.</h1>
+		</div>
+		<hr />
+		<h:panelGroup id="bookingDetails"
+			rendered="#{sDao.isDuplicateUserForSlot()}">
+			<div class="form-container">
+				<h:form id="myForm">
+
+
+					<h:message style="color:red" />
+
+					<f:facet name="header">
+						<h5 id="title">
+							<p:outputLabel value="Book Slot" />
+						</h5>
+					</f:facet>
+					<!-- 	<h:outputLabel value="rId :" />
+				<h:outputLabel value="#{loggedInUser.rId}" readonly="true" />
+				<br />
+				<br /> -->
+					<h:outputLabel value="Name :" />
+					<h:outputLabel value="#{sDao.getBookingOwnerName()}"
+						readonly="true">
+						<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+					</h:outputLabel>
+					<br />
+					<br />
+					<h:outputLabel value="Start Date :" />
+					<h:outputLabel value="#{sDao.loadStartDateForBooking()}"
+						readonly="true">
+						<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+					</h:outputLabel>
+					<br />
+					<br />
+
+					<h:outputLabel value="End Date :" />
+					<h:outputLabel value="#{sDao.loadEndDateForBooking()}"
+						readonly="true">
+						<f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+					</h:outputLabel>
+					<br />
+					<br />
+
+					<h:outputLabel value="Vehicle Number :" />
+					<h:outputLabel value="#{sDao.getCurrentSlot().vehicleNumber}"
+						readonly="true">
+					</h:outputLabel>
+					<br />
+					<br />
+
+					<h:outputLabel value="Vehicle Type :" />
+					<h:outputLabel value="#{sDao.getCurrentSlot().sCategory}"
+						readonly="true">
+					</h:outputLabel>
+					<br />
+					<br />
+
+
+					<h:outputLabel value="Total Bill :" />
+					<h:outputLabel value="#{sDao.getCurrentSlot().totalBill}"
+						readonly="true">
+					</h:outputLabel>
+					<br />
+					<br />
+
+
+					<!-- <f:facet name="footer"> -->
+					<h:panelGroup style="display:block; text-align:center">
+						<h:commandButton id="Renewal" value="Renewal"
+							style="background-color: rgb(30,144,255);border: none; color:white;
+							border-radius:10px; padding: 10px 20px; text-align: center;text-decoration: none;display: inline-block;font-size: 16px;"
+							action="#{sDao.renewSlotDetails()}" />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<h:commandButton id="Discontinue" value="Discontinue"
+							style="background-color: rgb(30,144,255);border: none; color:white;
+							border-radius:10px;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;"
+							action="#{sDao.initiateRefundProcess()}" />
+					</h:panelGroup>
+					<!-- </f:facet> -->
+
+
+				</h:form>
+				<br /> <br /> <br />
+
+			</div>
+		</h:panelGroup>
+		<h:panelGroup id="emtyDetails"
+			rendered="#{!sDao.isDuplicateUserForSlot()}">
+			<h3>Please book a slot first</h3>
+		</h:panelGroup>
+	</div>
+	<div id="footer">
+		<ui:include src="/Footer.xhtml" />
+	</div>
+
+	<script>
+        // Disable navigating back in browser history
+        window.history.pushState(null, document.title, window.location.href);
+        window.addEventListener('popstate', function (event) {
+            window.history.pushState(null, document.title, window.location.href);
+        });
+    </script>
+
+</h:body>
+
+</html>

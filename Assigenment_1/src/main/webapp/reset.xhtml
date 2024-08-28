@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style>
+body {
+	background-color: #ADD8E6;
+}
+
+body .ui-panel .ui-panel-content {
+	background-color: AZURE;
+	color: #000000;
+}
+
+input[type=text]:focus {
+	transition: width 0.4s ease-in-out;
+}
+
+.signupForm {
+	margin-left: 120px;
+	margin-top: 50px;
+	box-shadow: 10px 10px 5px darkgrey;
+	width: 500px;
+	border-radius: 20px;
+}
+</style>
+</h:head>
+<h:body>
+<center>
+	<f:facet name="last">
+		<h:outputStylesheet library="default" name="css/style.css" />
+		<h:outputStylesheet library="webjars"
+			name="font-awesome/5.12.0/css/all.min-jsf.css" />
+		<h:outputStylesheet library="webjars"
+			name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+	</f:facet>
+
+	<div class="signupForm" align="center">
+		<h:form>
+			
+			<p:panel id="panel-signup">
+
+				<!-- enable focus component -->
+				<p:focus context="panel-signup" />
+				<h1
+					style="color: Blue; width: 450px; box-shadow: 10px 10px 5px darkgrey;">
+					 Reset Password</h1>
+				<br />
+
+				<div class="col">
+					   <span class="pi pi-user" style="margin: 1rem;"></span>
+					<p:inputText id="userName" required="true" label="userName" 
+						size="38" requiredMessage="Please enter your username."
+						value="#{uName}" readonly="true" disabled="true" >
+					<!-- 	<f:validator validatorId="com.java.LoginProvider.UserValidation" /> -->
+						</p:inputText>
+					<p:watermark for="userName" value="Username *" />
+					<h:message for="userName" style="color:red; style=margin-left: 20px;" />
+				</div>
+				<br />
+				<div class="col">
+					   <span class="pi pi-lock" style="margin: 1rem;"></span>
+					<p:password id="password" required="true" label="password"
+						size="35" requiredMessage="Please enter your New password."
+						match="confirmPassword" value="#{register.passWord}"
+						toggleMask="true" maxlength="13"  style="margin-left: 20px;"></p:password>
+					<p:watermark for="password" value="Password *" />
+					<h:message for="password" style="color:red; style=margin-left: 50px;" />
+				</div>
+				<br />
+
+				<div class="col">
+					  <span class="pi pi-lock" style="margin: 1rem;"></span>
+					<p:password id="confirmPassword" required="true" size="35"
+						requiredMessage="Please enter confirm New password."
+						validatorMessage="password should contain min 8  and max 13
+						charactors and must contain one special charactoor and 
+						one upper and lower case letter"
+						label="confirmPassword" value="#{register.passWord}" maxlength="13"
+						toggleMask="true" style="margin-left: 50px;" >
+						<f:validateRegex
+							pattern="(?=^.{8,13}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" />
+							<f:validator
+validatorId="OldPasswordValidation" /> 
+					</p:password>
+					<p:watermark for="confirmPassword" value="Confirm New password *" />
+					<h:message for="confirmPassword" style="color:red; style=margin-left: 50px;"/>
+				</div>
+				<br />
+				<!-- 	</div> -->
+				<p:commandButton value="Change Password" style="margin:20px"
+					action="#{regDao.resetPassword(uName,register)}" ajax="false" /> 
+ 
+	     </p:panel>
+
+		</h:form>
+	</div>
+</center>
+</h:body>
+</html>

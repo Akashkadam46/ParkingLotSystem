@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Renew Slot</title>
+	<style>
+#title {
+	font-family: sans-serif;
+	border-bottom-style: inset;
+	padding-top: 0%;
+	padding-bottom: 0%;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	margin-left: 0;
+}
+
+#mainDiv {
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	margin-top: 20px;
+	background-color: buttonface;
+	width: 370px;
+}
+
+#UPDATE {
+	background-color: rgb();
+}
+</style>
+</h:head>
+<h:body style="background-repeat: no-repeat;
+  background-size: cover;">
+	<div>
+		<ui:include src="/HomePage.xhtml" />
+	</div>
+	<div id="mainDiv" align="center">
+		<h:form id="myForm">
+			<h:panelGrid id="panel" columns="2" border="1" cellpadding="10"
+				cellspacing="1">
+
+				<f:facet name="header">
+					<h4 id="title">
+						<p:outputLabel value="Confirm Payment" />
+					</h4>
+				</f:facet>
+				<f:facet name="header">
+					<h6 id="title">
+						<p:outputLabel
+							value="You have changed parking from slot number #{oldSlotNumber} to #{newSlotNumber}" />
+					</h6>
+				</f:facet>
+				<p:outputLabel value="Paid Before :" />
+				<p:outputLabel value="#{paidBefore}" readonly="true" />
+				<p:outputLabel value="Penalty Charge :" />
+				<p:outputLabel value="#{penaltyCharge}" readonly="true" />
+				<p:outputLabel value="updated parking charge :" />
+				<p:outputLabel value="#{newTotalBill}" readonly="true" />
+				<p:outputLabel value="Final Bill(Parking + penalty charge) :" />
+				<p:outputLabel value="#{updatedFinalBill}" readonly="true" />
+
+
+				<f:facet name="footer">
+					<h:panelGroup style="display:block; text-align:center">
+						<h:commandButton id="CANCEL" value="CANCEL"
+							style="background-color: rgb(30,144,255);border: none; color:white;
+							border-radius:10px; padding: 10px 20px; text-align: center;text-decoration: none;display: inline-block;font-size: 16px;"
+							action="HomePageNew.xtml" />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<h:commandButton id="ACCEPT" value="ACCEPT"
+							style="background-color: rgb(30,144,255);border: none; color:white;
+							border-radius:10px;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;"
+							action="#{sDao.renewSlotConfirm(renewedFinalSlot)}" />
+					</h:panelGroup>
+				</f:facet>
+			</h:panelGrid>
+
+		</h:form>
+		<br />
+
+
+	</div>
+	<div id="footer">
+		<ui:include src="/Footer.xhtml" />
+	</div>
+
+</h:body>
+
+</html>

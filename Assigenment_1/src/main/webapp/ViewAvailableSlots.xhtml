@@ -1,0 +1,138 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>View Availability</title>
+</h:head>
+<style>
+.container {
+	padding-left: 150px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	margin-top: 100px;
+	margin-left: 100px;
+	margin-right: 450px;
+}
+
+/* this is for h1*/
+.container h1 {
+	color: #2c4964;
+	text-shadow: 2px 2px 5px #2F4F4F;
+}
+
+.container h4 {
+	color: black;
+}
+
+.my-table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.my-table th, .my-table td {
+	border: 1px solid #ccc;
+	padding: 8px;
+	text-align: left;
+}
+
+.my-table th {
+	background-color: #f2f2f2;
+	font-weight: bold;
+} /*
+Optional: Hover effect for table rows */
+.my-table tr:hover {
+	background-color: #f9f9f9;
+} /* Optional: Alternating row background
+colors */
+.my-table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.header-style {
+	background-color: #f2f2f2;
+	font-weight: bold;
+}
+
+.even-row {
+	background-color: #f2f2f2;
+}
+
+.odd-row {
+	background-color: #ffffff;
+}
+</style>
+
+<h:body>
+
+
+	<div class="form-container">
+
+		<h:panelGroup id="duplicateUserMsg"
+			rendered="#{sDao.isDuplicateUserForSlot()}">
+			<div class="container">
+				<h1>You already booked slot, You can update or cancel it</h1>
+				<div class="button-container">
+					<!-- Add the button to go to the homepage -->
+					<h:button value="Display Details" outcome="Test.xhtml"
+						styleClass="go-home-button" />
+				</div>
+			</div>
+
+		</h:panelGroup>
+
+		<h:panelGroup id="emtyMsg" rendered="#{sDao.isEmtyMessegeShowable()}">
+			<div class="container">
+				<h1>All slots are reserved,kindly try after some time</h1>
+
+			</div>
+
+		</h:panelGroup>
+
+
+
+		<h:panelGroup id="tableGroup"
+			rendered="#{sDao.isSlotAvailableForLoggedUser}">
+			<h2 align="center">Slot Availability</h2>
+			<h:form styleClass="centered-form">
+				<h:dataTable id="avlTable" value="#{sDao.currentSlotAvl}" var="s"
+					border="1" styleClass="my-table" headerClass="header-style"
+					rowClasses="even-row,odd-row">
+					<h:column>
+						<f:facet name="header">
+                    Slot Number
+                </f:facet>
+						<h:outputText value="#{s.slotNumber}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+                    Reserved For
+                </f:facet>
+						<h:outputText value="#{s.reservedFor}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+                    Availability
+                </f:facet>
+						<h:commandButton action="#{sDao.goForBooking(s)}"
+							style="background-color: rgb(30,144,255);border: none; color:white;
+							border-radius:10px; padding: 10px 20px; text-align: center;text-decoration: none;display: inline-block;font-size: 10px;"
+							value="#{sDao.getButtonValue(s.availability)}" />
+					</h:column>
+				</h:dataTable>
+
+			</h:form>
+		</h:panelGroup>
+
+
+	</div>
+</h:body>
+
+</html>

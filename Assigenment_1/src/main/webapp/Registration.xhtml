@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<script>
+    function resetFormFields() {
+              // Replace 'myForm' with the ID of your form
+        var form = document.getElementById('myForm');
+
+        // Reset the form using JavaScript's reset() method
+        form.reset();
+    }
+    </script>
+	<title>Parking-lot Enrollment form</title>
+	<style>
+body {
+	background-image: u
+		rl(https :// img.freepik.com/ free-photo/ doctor-patient_1421-65.jpg ?  
+		 w = 2000);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+}
+
+label {
+	padding-left: 20px;
+	width: 190px;
+	color: black;
+	display: inline-block;
+	text-align:;
+}
+
+form {
+	background: gray;
+	width: 55%;
+	align: left; 0 auto;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+}
+
+.container {
+	border-radius: 8px;
+	background-color: #f2f2f2;
+	padding: 20px;
+}
+</style>
+
+
+</h:head>
+<h:body>
+	<f:facet name="last">
+		<h:outputStylesheet library="default" name="css/style.css" />
+	</f:facet>
+
+
+
+
+	<br />
+	<h1 style="position: absolute; top: 20px; left: 260px;">===
+		Registration For Parking-Lot ===</h1>
+
+
+	<div>
+		<h:form id="myForm" style="font-weight:bold;" onsubmit="resetFormFields()">
+			<p:outputPanel id="panel">
+				<p:panel id="panel-signup">
+					<!-- enable focus component -->
+					<p:focus context="panel-signup" />
+
+
+					<div class="container">
+
+
+						<center>
+							<h4 style="color: Red;">Note : All Fields are Mandatory
+								Please fill all carefully.</h4>
+						</center>
+
+
+						<br /> <label>Name : </label>
+						<p:inputText id="Name" required="true"
+							placeholder="Enter Full Name." label="Name"
+							requiredMessage="Enter Full Name." value="#{register.name}"
+							size="40">
+						</p:inputText>
+						<p:watermark for="Name" value="Enter Full Name" />
+						<br />
+						<h:message for="Name" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>Email Id :</label>
+						<p:inputText id="email" required="true" label="Email Id"
+							requiredMessage="Enter Email Id." value="#{register.email}"
+							size="40">
+							<f:validateRegex
+								pattern="(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)"></f:validateRegex>
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
+						<p:watermark for="email" value="Enter Email Id " />
+						<br />
+						<h:message for="email" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>Phone No :</label>
+						<p:inputText id="phoneNo" required="true" label="PhoneNo"
+							requiredMessage="Enter Phone No." value="#{register.phoneNumber}"
+							size="40">
+							<f:validator validatorId="phoneValidator" />
+						</p:inputText>
+						<p:watermark for="phoneNo" value="Enter Phone No " />
+						<br />
+						<h:message for="phoneNo" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>DOB:</label>
+						<p:calendar id="dob" value="#{register.dob}" pattern="yyyy-MM-dd"
+							required="true" maxdate="2005-01-01" label="calendar"
+							requiredMessage="Please enter dob.." />
+						<br />
+						<h:message for="dob" style="color:red; 200px; margin-left: 200px;" />
+						<br /> <br />
+						<p:watermark for="dob" value="Enter dob" />
+
+						<br /> <label>Category: </label>
+						<p:selectOneMenu id="Category" value="#{register.category}"
+							required="true" label="Category"
+							requiredMessage="Please select Category">
+
+
+							<f:selectItem itemLabel="--Select--" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="Admin" itemValue="ADMIN" />
+							<f:selectItem itemLabel="Staff" itemValue="STAFF" />
+						</p:selectOneMenu>
+						<br />
+						<h:message for="Category" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>UserName:</label>
+						<p:inputText id="userName" required="true"
+							label="Please Enter UserName " requiredMessage="Enter UserName"
+							value="#{register.userName}" size="40">
+							<f:validator validatorId="userNameValidator" />
+						</p:inputText>
+						<p:watermark for="userName" value="Enter UserName" />
+						<br />
+						<h:message for="userName" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>Security-Question-1:</label>
+						<p:selectOneMenu id="sec-que-1" value="#{register.secQ1}"
+							required="true" label="sec-que-1"
+							valueChangeListener="#{regDao.OnQ1Select}"
+							requiredMessage="Please select Your Question">
+
+
+							<f:selectItem itemLabel="--Select--" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{regDao.securityQuestions}" />
+							<p:ajax update="sec-que-2"></p:ajax>
+						</p:selectOneMenu>
+						<br />
+						<h:message for="sec-que-1" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <br /> <label>Ans-1 :</label>
+						<p:inputText id="ans-1" required="true" label="Enter Answer"
+							requiredMessage="Enter Answer." value="#{register.ans1}"
+							size="40">
+							<f:validator
+								validatorId="com.infinite.java.parkinglot.AnswerValidation" />
+
+
+						</p:inputText>
+						<p:watermark for="ans-1" value="Enter Answer " />
+						<br />
+						<h:message for="ans-1" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>Security-Question-2:</label>
+						<p:selectOneMenu id="sec-que-2" value="#{register.secQ2}"
+							required="true" label="sec-que-2"
+							valueChangeListener="#{regDao.OnQ2Select}"
+							requiredMessage="Please select Your Question">
+
+
+							<f:selectItem itemLabel="--Select--" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{regDao.securityQuestionsSet2}" />
+							<p:ajax update="sec-que-3"></p:ajax>
+						</p:selectOneMenu>
+						<br />
+						<h:message for="sec-que-2" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>Ans-2 :</label>
+						<p:inputText id="ans-2" required="true" label="Enter Answer"
+							requiredMessage="Enter Answer." value="#{register.ans2}"
+							size="40">
+							<f:validator
+								validatorId="com.infinite.java.parkinglot.AnswerValidation" />
+						</p:inputText>
+						<p:watermark for="ans-2" value="Enter Answer " />
+						<br />
+						<h:message for="ans-2" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>Security-Question-3:</label>
+						<p:selectOneMenu id="sec-que-3" value="#{register.secQ3}"
+							required="true" label="sec-que-3"
+							requiredMessage="Please select Your Question">
+
+
+							<f:selectItem itemLabel="--Select--" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{regDao.securityQuestionsSet3}" />
+						</p:selectOneMenu>
+						<br />
+						<h:message for="sec-que-3" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>Ans-3 :</label>
+						<p:inputText id="ans-3" required="true" label="Enter Answer"
+							requiredMessage="Enter Answer." value="#{register.ans3}"
+							size="40">
+							<f:validator
+								validatorId="com.infinite.java.parkinglot.AnswerValidation" />
+						</p:inputText>
+						<p:watermark for="ans-3" value="Enter Answer " />
+						<br />
+						<h:message for="ans-3" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>PassWord :</label>
+						<p:password id="passWord" required="true" label="PassWord"
+							match="c-passWord" requiredMessage="Enter Password."
+							value="#{register.passWord}"
+							validatorMessage="your password should contain one uppercase one lowercase and one special symbol + password and confirm password must be same"
+							size="40">
+							<f:validateRegex
+								pattern="(^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^*-]).{8,}$)"></f:validateRegex>
+						</p:password>
+						<p:watermark for="passWord" value="Enter Password " />
+						<br />
+						<h:message for="passWord" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br /> <label>Confirm PassWord :</label>
+						<p:password id="c-passWord" required="true" label="c-PassWord"
+							oncopy="return false;" onpaste="return false;"
+							requiredMessage="Enter confirm Password." size="40">
+						</p:password>
+						<p:watermark for="c-passWord" value="Enter confirm Password " />
+						<br />
+						<h:message for="c-passWord" globalOnly="true"
+							style="color:red; 200px; margin-left: 200px;" />
+						<br />
+
+
+
+						<p:commandButton value="SUBMIT" 
+							action="#{regDao.registerUser(register)}" ajax="false"
+							style="margin-left: 50px; width: 250px; box-shadow: 2px 2px 2px darkgrey; text-shadow: 1px 1px 1px black;
+                font-weight: bold;" />
+
+						<p:commandButton value="Reset"
+							style="margin-left: 50px; width: 250px; box-shadow: 2px 2px 2px darkgrey; text-shadow: 1px 1px 1px black;
+                font-weight: bold;">
+							<p:ajax update="panel" resetValues="true" />
+						</p:commandButton>
+
+					</div>
+
+
+
+
+				</p:panel>
+			</p:outputPanel>
+		</h:form>
+	</div>
+	<script>
+        // Disable navigating back in browser history
+        window.history.pushState(null, document.title, window.location.href);
+        window.addEventListener('popstate', function (event) {
+            window.history.pushState(null, document.title, window.location.href);
+        });
+    </script>
+</h:body>
+</html>

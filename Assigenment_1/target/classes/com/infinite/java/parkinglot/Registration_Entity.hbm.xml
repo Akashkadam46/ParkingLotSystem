@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.infinite.java.parkinglot.Registration_Entity"
+		table="REGISTER">
+
+		<id name="rId" type="int" column="Rid">
+			<generator class="native" />
+		</id>
+
+		<property name="name" column="Name" type="string" />
+		<property name="email" column="Email" type="string" />
+		<property name="phoneNumber" column="P_number" type="string" />
+		<property name="dob" column="DOB" type="date" />
+		<property name="secQ1" column="s_Que1" type="string" />
+		<property name="ans1" column="a_Que1" type="string" />
+		<property name="secQ2" column="s_Que2" type="string" />
+		<property name="ans2" column="a_Que2" type="string" />
+		<property name="secQ3" column="s_Que3" type="string" />
+		<property name="ans3" column="a_Que3" type="string" />
+		<property name="userName" column="Username" type="string" />
+		<property name="passWord" column="Password" type="string" />
+		<property name="category">
+
+			<column name="Category" />
+
+
+			<type name="org.hibernate.type.EnumType">
+
+				<param name="enumClass">com.infinite.java.parkinglot.Category</param>
+
+				<param name="useNamed">true</param>
+
+			</type>
+
+		</property>
+
+		<one-to-one name="slot" class="com.infinite.java.parkinglot.Slot"
+			cascade="all"></one-to-one>
+
+
+
+	</class>
+</hibernate-mapping>

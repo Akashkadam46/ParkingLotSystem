@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.infinite.java.parkinglot.SlotAvailability"
+		table="slotAvailability">
+		<meta attribute="class-description">
+			This class contains the department detail.
+		</meta>
+		<id name="slotNumber" type="int" column="slotNumber">
+			<generator class="assigned" />
+		</id>
+
+		<property name="availability" type="int" column="availability">
+
+		</property>
+
+		<property name="reservedFor" type="string" column="reservedFor">
+
+		</property>
+	</class>
+</hibernate-mapping>

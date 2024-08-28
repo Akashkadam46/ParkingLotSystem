@@ -1,0 +1,204 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+<title>Parking Main Page</title>
+<style>
+body{
+    background-image: url("https://virtina.com/wp-content/uploads/2019/04/MedicalHealthcare.png");
+}
+
+.navbar {
+	background-color: #87CEFA;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 20px;
+}
+
+.navbar ul {
+	list-style-type: none;
+	display: flex;
+	margin: 0;
+	padding: 10px 20px;
+}
+
+.navbar li {
+	margin-right: 20px;
+}
+
+.navbar li:last-child {
+	margin-right: 0;
+}
+
+.nav-brand {
+	font-size: 25px;
+	font-style: italic;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fff;
+}
+
+.navbar a {
+	color: black;
+	text-decoration: none;
+	font-weight: lighter;
+	/*text-transform: uppercase;*/
+	padding: 10px;
+	transition: all 0.2s ease-in-out;
+}
+
+.nav-link {
+	color: #fff;
+	text-decoration: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+.navbar a:hover {
+	background-color: #fff;
+	color: #333;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+	background-color: white;
+}
+
+.nav-link{
+  color: black;
+  cursor: pointer;
+}
+</style>
+<!-- <link rel="stylesheet" href="HamburgerButton.css"/> -->
+</h:head>
+
+<h:body>
+<div>
+<nav class="navbar">
+    <h:outputLink value="HomePageNew.xhtml" class="nav-brand">Parking-Lot</h:outputLink>
+    <ul>
+		
+		 <li class="dropdown">
+			<h:outputLink value="#" class="nav-link">
+			<p:chip style="background-color: #87CEFA" icon="pi pi-align-center" styleClass="mr-1"/>
+			Parking Slot</h:outputLink>
+			<div class="dropdown-content">
+			<h:outputLink value="ViewAvailableSlots.xhtml">Book Slot</h:outputLink> 
+			<h:outputLink value="Test.xhtml">Display the Details</h:outputLink> 
+			<h:outputLink value="ShowAvailabilities.xhtml">Update Provider</h:outputLink> 
+			</div>
+		</li>
+		
+		<li class="dropdown">
+			<h:outputLink value="#" class="nav-link">
+			<p:chip style="background-color: #87CEFA" icon="pi pi-book" styleClass="mr-2"/>Member</h:outputLink>
+			<div class="dropdown-content">
+			<h:outputLink value="ViewAppointment.xhtml">Search and Enquiry</h:outputLink>
+			<h:outputLink value="ViewAppointment.xhtml">Update Member</h:outputLink>
+			
+			 
+			</div>
+		</li>
+		
+		<!-- <li class="dropdown">
+			<h:outputLink value="#" class="nav-link">Claim</h:outputLink>
+			<div class="dropdown-content">
+			<h:outputLink value="ViewAvailability.xhtml">Create Claim</h:outputLink>
+			<h:outputLink value="#">Search Claim</h:outputLink> 
+			</div>
+		</li> -->
+		
+		<li class="dropdown">
+			<h:outputLink value="#" class="nav-link">
+			<p:chip style="background-color: #87CEFA" icon="pi pi-paypal" styleClass="mr-1"/>Claims</h:outputLink>
+			<div class="dropdown-content">
+			<h:outputLink value="SearchClaims.xhtml">Search Claims</h:outputLink>
+			<h:outputLink value="#">Process Insurance Claims</h:outputLink> 
+			</div>
+		</li>
+		
+		 <li class="dropdown">
+			<h:outputLink value="#" class="nav-link" >
+			<p:chip style="background-color: #87CEFA" icon="pi pi-link" styleClass="mr-1"/>
+			Pharmacy</h:outputLink><!-- Our services -->
+			<div class="dropdown-content">
+			<h:outputLink value="PatientlHistory.xhtml">Review and Approve</h:outputLink>
+		<!-- 	<h:outputLink value="#">Prescription And Recommendations</h:outputLink>
+			<h:outputLink value="#">View Insurance</h:outputLink>  -->
+			</div>
+		</li> 
+    
+     <li class="dropdown">
+			<h:outputLink value="#" class="nav-link" >
+			<p:chip style="background-color: #87CEFA" icon="pi pi-link" styleClass="mr-1"/>
+			Payment</h:outputLink><!-- Our services -->
+			<div class="dropdown-content">
+			<h:outputLink value="reset1.xhtml">Payement To Hospitals</h:outputLink>
+		<!-- 	<h:outputLink value="#">Prescription And Recommendations</h:outputLink>
+			<h:outputLink value="#">View Insurance</h:outputLink>  -->
+			</div>
+		</li> 
+      <!-- <li><h:outputLink value="Contact.xhtml">
+      <p:chip style="background-color: #87CEFA" icon="pi pi-phone" styleClass="mr-2"/>Contact Us</h:outputLink></li> -->
+      <h:form>
+      
+      <li><h:commandLink action="reset.xhtml"  value="Reset Password" style="background-color: #87CEFA" icon="pi pi-link" styleClass="mr-1"/></li>
+      <br/>
+      <br/>
+      <li><h:commandLink  action="login.xhtml" value="Log out" style="background-color: #87CEFA" icon="pi pi-link" styleClass="mr-1" />
+			</li>
+			</h:form>
+			
+		
+	
+		
+
+	
+      
+       <!-- <h:form>
+    <div id="hamburger">
+        <input type="checkbox" id="hamburger-checkbox" />
+        <label for="hamburger-checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul id="menu">
+            <li><h:outputLink value="#">Patient Medical History</h:outputLink></li>
+            <li><h:outputLink value="#">Prescription And Recommendations</h:outputLink></li>
+            <li><h:outputLink value="#">View Insurance</h:outputLink> </li>
+        </ul>
+    </div>
+</h:form> -->
+    </ul> 
+    
+  </nav>
+  
+</div>
+
+</h:body>
+	 
+</html>

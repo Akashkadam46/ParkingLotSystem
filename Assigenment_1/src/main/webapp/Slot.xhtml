@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+ 
+
+<h:head>
+<title>Slot Booking</title>
+<style>
+body {
+background-image:
+u rl(https://img.freepik.com/free-photo/doctor-patient_1421-65.jpg?w=2000);
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center center;
+background-attachment: fixed;
+}
+ 
+
+label {
+padding-left: 20px;
+width: 190px;
+color: black;
+display: inline-block;
+text-align:;
+}
+ 
+
+form {
+background: gray;
+width: 55%;
+align: left;
+0 auto;
+position: absolute;
+top: 100px;
+left: 100px;
+}
+ 
+
+.container {
+border-radius: 8px;
+background-color: #f2f2f2;
+padding: 20px;
+}
+</style>
+ 
+
+</h:head>
+<h:body>
+<f:facet name="last">
+<h:outputStylesheet library="default" name="css/style.css" />
+</f:facet>
+ 
+
+ 
+
+<br />
+<h1 style="position: absolute; top: 20px; left: 260px;">===
+Registration For Parking-Lot ===</h1>
+ 
+
+<div>
+<h:form style="font-weight:bold;">
+<p:outputPanel id="panel">
+<p:panel id="panel-signup">
+<!-- enable focus component -->
+<p:focus context="panel-signup" />
+ 
+
+<div class="container">
+ 
+
+<center>
+<h4 style="color: Red;">Note : All Fields are Mandatory
+Please fill all carefully.</h4>
+</center>
+ 
+
+<br /> <label>Vehicle Number : </label>
+<p:inputText id="No" required="true"
+        placeholder="Enter Vehicle Number." label="No"
+        requiredMessage="Enter Vehicle Number."
+         size="40">
+</p:inputText>
+<p:watermark for="No" value="Enter Vehicle Number" />
+<br />
+<h:message for="No" globalOnly="true"
+style="color:red; 200px; margin-left: 200px;" />
+
+<br /><label>Start Date:</label>
+			<p:calendar id="sdate"  pattern="yyyy-MM-dd"
+				required="true"  label="sadte" requiredMessage="Please enter Start Date.."  /><br/>
+			<h:message for="sdate" style="color:red; 200px; margin-left: 200px;" />
+			<br />
+			<br />
+<p:watermark for="sdate" value="Enter Start Date" />
+<br/>
+
+<label>End Date:</label>
+			<p:calendar id="edate"  pattern="yyyy-MM-dd"
+				required="true"  label="sadte" requiredMessage="Please enter end date.."  /><br/>
+			<h:message for="edate" style="color:red; 200px; margin-left: 200px;" />
+			<br />
+			<br />
+<p:watermark for="edate" value="Enter End Date" />
+<br /><label>Category: </label>
+<p:selectOneMenu id="Category" 
+required="true" label="Category"
+requiredMessage="Please select Category">
+ 
+
+<f:selectItem itemLabel="--Select--" itemValue=""
+noSelectionOption="true" />
+<f:selectItem itemLabel="Two_Wheeler" itemValue="TWO_WHEELER" />
+<f:selectItem itemLabel="Four_Wheeler" itemValue="FOUR_WHEELER" />
+</p:selectOneMenu>
+<br />
+<h:message for="Category" globalOnly="true"
+style="color:red; 200px; margin-left: 200px;" />
+<br />
+
+
+<p:commandButton value="Book Slot"
+					ajax="false"
+style="margin-left: 50px; width: 250px; box-shadow: 2px 2px 2px darkgrey; text-shadow: 1px 1px 1px black;
+                font-weight: bold;" />
+
+ <p:commandButton value="Reset"
+                    style="margin-left: 50px; width: 250px; box-shadow: 2px 2px 2px darkgrey; text-shadow: 1px 1px 1px black;
+                font-weight: bold;" >
+                <p:ajax update="panel" resetValues="true" /></p:commandButton>
+
+</div>
+ 
+
+ 
+
+</p:panel>
+</p:outputPanel>
+</h:form>
+</div>
+</h:body>
+</html>
